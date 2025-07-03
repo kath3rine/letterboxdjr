@@ -1,6 +1,9 @@
 {
   "name": "letterboxdjr",
   "homepage": "https://kath3rine.github.io/letterboxdjr",
+  "gh-pages": {
+    "repo": "https://github.com/kath3rine/letterboxdjr.git"
+  },
   "version": "0.1.0",
   "private": true,
   "dependencies": {

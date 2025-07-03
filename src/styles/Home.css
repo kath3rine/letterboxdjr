@@ -1,0 +1,23 @@
+#home-page {
+    h1 {
+        margin-left: 30%;
+        margin-right: 30%;
+        width: 40%;
+        font-size: 50px;
+        text-align: center;
+        font-family: Georgia, 'Times New Roman', Times, serif
+    }
+}
+
+#buttons {
+    button {
+        margin: 10px;
+        background-color: #ddd;
+        font-size: 15px;
+        padding: 5kpx;
+        width: 100px;
+    }
+
+    justify-content: center;
+    display: flex;
+}
