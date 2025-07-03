@@ -7,7 +7,7 @@ import '../src/App.css'
 
 function App() {
   return (
-    <Router>
+    <Router basename="/letterboxdjr">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/diary" element={<Diary />} />

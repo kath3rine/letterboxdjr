@@ -1,5 +1,6 @@
 {
   "name": "letterboxdjr",
+  "homepage": "https://kath3rine.github.io/letterboxdjr",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
