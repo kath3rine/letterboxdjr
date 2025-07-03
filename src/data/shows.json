@@ -1,0 +1,27 @@
+[
+    {
+        "title": "Lessons in Chemistry",
+        "points": 4,
+        "episodes": 8,
+        "month": 1
+    },
+    {
+        "title": "Midnight Mass",
+        "points": 3,
+        "episodes": 7,
+        "month": 3
+    },
+    {
+        "title": "Yellowjackets",
+        "points": 5,
+        "episodes": 29,
+        "month": 4
+    },
+    {
+        "title": "Twin Peaks",
+        "points": 4,
+        "episodes": 8,
+        "month": 6,
+        "review": "a little slow / not as gripping as i'd like"
+    }
+]

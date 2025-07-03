@@ -1,0 +1,65 @@
+[
+    { 
+        "title": "Aftersun",
+        "points": 2,
+        "month": 2,
+        "review": "more of a montage than a coherent film with an actual plot"
+    },
+    { 
+        "title": "Anora",
+        "points": 3,
+        "month": 3
+    },
+    { 
+        "title": "Bottoms",
+        "points": 4,
+        "month": 3,
+        "review": "Booksmart's awkward gay cousin" 
+    },
+    { 
+        "title": "Shiva Baby",
+        "points": 4,
+        "month": 6
+    },
+    { 
+        "title": "Bodies Bodies Bodies",
+        "points": 5,
+        "month": 6,
+        "review": "Good watch. Tense with a little bit of Gen-Z humor" 
+    },
+    { 
+        "title": "Chungking Express",
+        "points": 3,
+        "month": 6,
+        "review": "Could not bring myself to care" 
+    },
+    { 
+        "title": "Fallen Angels",
+        "points": 4, 
+        "month": 6
+    },
+    { 
+        "title": "Blue Velvet",
+        "points": 3,
+        "month": 6,
+        "review": "WTF (derogatory)" 
+    }, 
+    {
+        "title": "Saving Face",
+        "points": 3,
+        "month": 6,
+        "review": "cute" 
+    },
+    { 
+        "title": "Parachute",
+        "points": 3,
+        "month": 6,
+        "review": "I didn't 'get' it" 
+    },
+    { 
+        "title": "Cabaret",
+        "points": 4,
+        "month": 6
+    }
+  ]
+  

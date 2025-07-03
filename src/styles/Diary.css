@@ -1,0 +1,86 @@
+@import "../App.css";
+
+
+#review {
+  opacity: 0.5;
+}
+
+.film {
+    height: 165px;
+    width: 125px;
+    position: relative;
+    cursor: pointer;
+    perspective: 1000px;
+    border: 20px black solid;
+  }
+  
+  #film-front, #film-back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    transition: transform 0.5s;
+    justify-content: center;
+    border-radius: 10px;
+    padding: 10px;
+    text-wrap: wrap;
+
+    background-color: white;
+
+    p {
+      margin-top: 0px;
+    }
+  }
+
+  #film-front {
+    font-weight: bold;
+    text-align: center;
+
+    img {
+      width: 100%;
+      height: 130px;
+      opacity: 0.75;
+      border-radius: 10px;
+    }
+  }
+  
+  #film-back {
+    transform: rotateX(180deg);
+    font-weight: 400;
+  }
+  
+  .flipped #film-front {
+    transform: rotateX(180deg);
+  }
+  
+  .flipped #film-back {
+    transform: rotateX(360deg);
+  }
+
+  #wrapper2 {
+    height: 225px;
+    border-top: 15px white dashed;
+    border-bottom: 15px white dashed;
+  }
+
+  #wrapper1 {
+    background-color: black;
+    padding-top: 15px;
+    height: 275px;
+    margin-bottom: 30px;
+  }
+
+.reel {
+    display: flex;
+    flex-wrap: wrap;
+
+    p {
+      color: black;
+    }
+}
+
+#film-charts {
+  display: flex;
+  flex-wrap: wrap;
+}
+

@@ -1,0 +1,52 @@
+#stats-header {
+    #header-bottom {
+        color: #888;
+        margin: 1px;
+    }
+
+    #header-top {
+        color: #bbb;
+        margin: 10px;
+        font-size: 30px;
+        font-weight: bold;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+
+    text-align: center;
+    display: flex;
+    margin-left: 0%;
+    margin-right: 0%;
+    justify-content: center;
+}
+
+#header-item {
+    margin: 10px;
+    width: 150px;
+}
+
+#stats-page {
+
+    h1 {
+        text-align: center;
+        font-size: 50px;
+        margin: 0px;
+        color: white;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+
+    h3 {
+        padding-top: 20px;
+        margin-top: 10px;
+    }
+}
+
+.stats-section {
+    display: flex;
+    flex-wrap: wrap;
+    border-top: 1px #555 solid;
+    justify-content: space-around;
+
+    h3 {
+        margin-left: 10%;
+    }
+}
