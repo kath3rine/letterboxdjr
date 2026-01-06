@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/letterboxdjr/static/css/main.4c78e4ba.css",
-    "main.js": "/letterboxdjr/static/js/main.57c372ee.js",
+    "main.css": "/letterboxdjr/static/css/main.939f8b51.css",
+    "main.js": "/letterboxdjr/static/js/main.f5151d4c.js",
     "static/js/453.b9c3ae92.chunk.js": "/letterboxdjr/static/js/453.b9c3ae92.chunk.js",
     "index.html": "/letterboxdjr/index.html",
-    "main.4c78e4ba.css.map": "/letterboxdjr/static/css/main.4c78e4ba.css.map",
-    "main.57c372ee.js.map": "/letterboxdjr/static/js/main.57c372ee.js.map",
+    "main.939f8b51.css.map": "/letterboxdjr/static/css/main.939f8b51.css.map",
+    "main.f5151d4c.js.map": "/letterboxdjr/static/js/main.f5151d4c.js.map",
     "453.b9c3ae92.chunk.js.map": "/letterboxdjr/static/js/453.b9c3ae92.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.4c78e4ba.css",
-    "static/js/main.57c372ee.js"
+    "static/css/main.939f8b51.css",
+    "static/js/main.f5151d4c.js"
   ]
 }
