@@ -10,7 +10,7 @@ export type Input = {
 
 export type DiaryEntry = {
     title: string
-    poster: string | null
+    poster: string 
     points: number
     review: string
 }

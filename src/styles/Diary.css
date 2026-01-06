@@ -5,16 +5,23 @@
   opacity: 0.5;
 }
 
+#film-inner .film {
+  border: 20px black solid;
+}
+
 .film {
     height: 165px;
     width: 125px;
     position: relative;
     cursor: pointer;
     perspective: 1000px;
-    border: 20px black solid;
+
+    #film-title {
+      font-size: 15px;
+    }
   }
   
-  #film-front, #film-back {
+  .film-front, .film-back {
     width: 100%;
     height: 100%;
     position: absolute;
@@ -32,7 +39,7 @@
     }
   }
 
-  #film-front {
+  .film-front {
     font-weight: bold;
     text-align: center;
 
@@ -44,30 +51,73 @@
     }
   }
   
-  #film-back {
+  .film-back {
     transform: rotateX(180deg);
     font-weight: 400;
   }
   
-  .flipped #film-front {
+  .flipped .film-front {
     transform: rotateX(180deg);
   }
   
-  .flipped #film-back {
+  .flipped .film-back {
     transform: rotateX(360deg);
   }
 
-  #wrapper2 {
+  #film-inner {
     height: 225px;
-    border-top: 15px white dashed;
-    border-bottom: 15px white dashed;
+    border-top: 10px white dashed;
+    border-bottom: 10px white dashed;
   }
 
-  #wrapper1 {
+  #film-outer {
     background-color: black;
     padding-top: 15px;
     height: 275px;
     margin-bottom: 30px;
+  }
+
+
+  #vhs-inner {
+    .film {
+      height: 130px;
+      width: 250px;
+      margin: 20px;
+    }
+
+    .film-front {
+      background-color: black;
+    }
+
+    #vhs-tape {
+      background-color: #bbb;
+      width: 94%;
+      height: 60%;
+      margin: 10% 3% 10% 3%;
+      border-radius: 25px;
+      z-index: 1;
+    }
+
+    #vhs-label {
+      background-color: white;
+      height: 140%;
+      z-index: 3;
+      margin: -7% 10% -5% 10%;
+      border: black 5px solid;
+    }
+
+    #film-title {
+      font-size: 20px;
+      color: #555;
+    }
+
+    #roll {
+      margin: 0% 15% 0% 15%;
+      height: 70%;
+      border: 8px solid black;
+      border-radius: 50px;
+      background-color: none;
+    }
   }
 
 .reel {

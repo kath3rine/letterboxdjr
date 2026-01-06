@@ -4,6 +4,7 @@ import { getDiary } from '../utils/Diary'
 import { DiaryEntry } from '../utils/Types'
 import movieObjects from '../data/movies.json';
 import tvObjects from '../data/shows.json';
+import theaterObjects from '../data/theater.json';
 import '../styles/Diary.css'
 import '../App.css'
 
@@ -15,15 +16,15 @@ function Film({film, index}: {film: DiaryEntry, index: number}) {
     };
 
     return(
-        <div id="wrapper1">
-            <div id="wrapper2">
+        <div id="film-outer">
+            <div id="film-inner">
             <div className={`film ${isFlipped ? 'flipped' : ''}`} onClick={handleClick}>
-                    <div id="film-front">
+                    <div className="film-front">
                         <img src={film.poster ? film.poster : ''}/>
                         <p id="film-title">{film.title}</p>
                     </div>
 
-                    <div id="film-back">
+                    <div className="film-back">
                         <p id="details">#{index + 1} | rating: {film.points}/5</p>
                         <p id="review">{film.review}</p>
                     </div>
@@ -33,9 +34,41 @@ function Film({film, index}: {film: DiaryEntry, index: number}) {
     )
 }
 
+function VHS({film, index}: {film: DiaryEntry, index: number}) {
+  const [isFlipped, setIsFlipped] = useState(false);
+
+  const handleClick = () => {
+    setIsFlipped(!isFlipped);
+  };
+
+  return(
+      <div id="vhs-outer">
+          <div id="vhs-inner">
+          <div className={`film ${isFlipped ? 'flipped' : ''}`} onClick={handleClick}>
+                  <div className="film-front">
+                    <div id="vhs-tape">
+                      <div id="roll">
+                      <div id="vhs-label">
+                      <p id="film-title">{film.title}</p>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="film-back">
+                      <p id="details">#{index + 1} | rating: {film.points}/5</p>
+                      <p id="review">{film.review}</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+  )
+}
+
 type ReelType = {
     films: DiaryEntry[]
     title?: string
+    style: 'film' | 'vhs'
 }
 
 function FilmReel(props: ReelType) {
@@ -46,12 +79,16 @@ function FilmReel(props: ReelType) {
 
             <div className="reel">
                 { props.films.map((film: DiaryEntry, index: number) => (
-                    <Film film={film} index={index}/>
+                    props.style == 'film' 
+                      ? <Film film={film} index={index}/>
+                      : <VHS film={film} index={index} />
                 ))}
             </div>
         </div>
     )
 }
+
+
 
 function Diary() {
   const location = useLocation();
@@ -60,16 +97,19 @@ function Diary() {
   const [loading, setLoading] = useState(true);
   const [movieData, setMovieData] = useState<DiaryEntry[]>([]);
   const [tvData, setTvData] = useState<DiaryEntry[]>([]);
+  const [theaterData, setTheaterData] = useState<DiaryEntry[]>([]);
 
   useEffect(() => {
     async function loadData() {
       try {
-        const [movies, shows] = await Promise.all([
+        const [movies, shows, plays] = await Promise.all([
           getDiary(movieObjects, 'movie'),
-          getDiary(tvObjects, 'tv')
+          getDiary(tvObjects, 'tv'),
+          getDiary(theaterObjects, 'theater')
         ]);
         setMovieData(movies);
         setTvData(shows);
+        setTheaterData(plays);
       } catch (err) {
         console.log("Failed to load diary data:", err);
       } finally {
@@ -80,9 +120,10 @@ function Diary() {
     loadData();
   }, []);
 
-  const reels: {title?: string; films: DiaryEntry[]}[] = [
-    { title: "my 2025 movie reel", films: movieData },
-    { title: "my 2025 tv show reel", films: tvData }
+  const reels: {title?: string; films: DiaryEntry[]; style: 'film' | 'vhs'}[] = [
+    { title: "my 2025 movie reel", films: movieData, style: "film" },
+    { title: "my 2025 tv show reel", films: tvData, style: "film" },
+    { title: "my 2025 theater reel", films: theaterData, style: "vhs" }
   ]
 
   if (loading) return <div>Loading diary...</div>;
@@ -94,7 +135,8 @@ function Diary() {
         </button>
         { reels.map((reel: ReelType) => (
             <FilmReel title={reel.title}
-            films={reel.films} />
+            films={reel.films}
+            style={reel.style} />
         ))}
     </div>
   );
