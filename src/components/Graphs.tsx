@@ -72,8 +72,9 @@ type PieProps = {
 }
 
 export function PieGraph(props: PieProps) {
-    const renderCustomizedLabel = ({ percent }: any) => {
-        return `${(percent * 100).toFixed(0)}%`;
+    const renderCustomizedLabel = ({ percent, name }: any) => {
+        if (percent <= 0.05) { return null }
+        return `${name}: ${(percent * 100).toFixed(0)}%`;
       };
 
     return(
@@ -90,8 +91,6 @@ export function PieGraph(props: PieProps) {
                     ))}
                 </Pie>
                 <Tooltip />
-                {!props.legend && 
-                <Legend layout="vertical" align="right" iconSize={5}/> }
             </PieChart>
         </div>
     )

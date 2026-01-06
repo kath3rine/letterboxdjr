@@ -16,7 +16,32 @@ type HeaderItem = {
 function Stats() {
     const location = useLocation();
     const navigate = useNavigate();
-    const palette = [ "#00e054", "#ff8000", "#40bcf4", "#eee",  "#555", "#aaa" ]
+    const palette = [
+      "#00E054",
+      "#40BCF4",
+      "#FF8000"
+    ]
+    const greens = [
+      "#00E054",
+      "#22E46B",
+      "#42E880",
+      "#61EC95",
+      "#81F0AA",
+      "#A0F3C0",
+      "#C0F7D5",
+      "#DFFBEA"
+    ]
+    const blues = [
+      "#40BCF4",
+      "#71CDF7",
+      "#A0DEFA",
+      "#D0EEFC"
+    ]
+    const oranges = [
+      "#FF8000",
+      "#FFAB57",
+      "#FFD5AB"
+    ]
     const w = 430
     const h = 180
 
@@ -93,8 +118,7 @@ function Stats() {
 
         <h3> MOST WATCHED </h3>
         <div className="stats-section">
-
-        <PieGraph w={w} h={h}
+        <PieGraph w={w*0.8} h={h}
             title="media (in hours)" 
             palette={palette}
             data={[
@@ -102,33 +126,35 @@ function Stats() {
                 { "name": "tv", "value": data.tvHrs },
                 { "name": "theater", "value": data.theaterCount * 2}
             ]}/>
-        <BarGraph w={w} h={h}
+
+
+        <BarGraph w={w*1.3} h={h}
             title="decades - movies"
             domain={6}
             data={data.movieDecades}
-            color={0}
-            palette={palette}/>            
+            palette={greens}/>            
             
             <BarGraph w={w} h={h}
             title="decades - tv"
-            color={1}
             domain={6}
             data={data.tvDecades}
-            palette={palette}/>
+            palette={blues}/>
+
+
             
-            <PieGraph w={w} h={h}
+            <PieGraph w={w*1.3} h={h}
             title="genres - movies" 
-            palette={palette}
+            palette={greens}
             data={data.movieGenres}/>
 
             <PieGraph w={w} h={h}
             title="genres - tv" 
-            palette={palette}
+            palette={blues}
             data={data.tvGenres}/>
 
-            <PieGraph w={w} h={h}
+            <PieGraph w={w*0.8} h={h}
             title="venues - theater" 
-            palette={palette}
+            palette={oranges}
             data={data.theaterGenres}/>
 
             
@@ -139,14 +165,14 @@ function Stats() {
             title="months - movies"
             data={data.movieMonths}
             domain={75}
-            palette={palette}/>
+            palette={greens}/>
 
 
             <AreaGraph w={w} h={h}
             color={1}
             title="months - tv"
             data={data.tvMonths}
-            palette={palette}/>
+            palette={blues}/>
 
             <AreaGraph w={w} h={h}
             color={2}
@@ -171,37 +197,35 @@ function Stats() {
 
             <BarGraph w={w * 1.3} h={h}
             title="decades - movies"
-            color={0}
             domain={5}
             data={data.movieDecadeRatings}
-            palette={palette}/>
+            palette={greens}/>
 
             <BarGraph w={w} h={h}
             title="decades - tv"
-            color={1}
             domain={5}
             data={data.tvDecadeRatings}
-            palette={palette}/>
+            palette={blues}/>
             
-            <BarGraph w={w*0.8} h={h}
-            title="venues - theater"
-            domain={5}
-            data={data.theaterGenreRatings}
-            palette={palette}/>
+
 
             <BarGraph w={w*1.3} h={h}
             title="genres - movies"
             domain={5}
             data={data.movieGenreRatings}
-            palette={palette}/>
+            palette={greens}/>
 
             <BarGraph w={w} h={h}
             title="genres - tv"
             domain={5}
             data={data.tvGenreRatings}
-            palette={palette}/>
+            palette={blues}/>
 
-
+<BarGraph w={w*0.8} h={h}
+            title="venues - theater"
+            domain={5}
+            data={data.theaterGenreRatings}
+            palette={oranges}/>
 
         </div>
         
