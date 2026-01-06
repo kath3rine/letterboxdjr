@@ -147,7 +147,7 @@ function Stats() {
             data={data.movieGenreRatings}
             palette={palette}/>
 
-            <BarGraph w={w} h={h}
+            <BarGraph w={w*0.8} h={h}
             title="genres - tv"
             domain={5}
             data={data.tvGenreRatings}
@@ -160,7 +160,7 @@ function Stats() {
             data={data.movieDecadeRatings}
             palette={palette}/>
 
-            <BarGraph w={w} h={h}
+            <BarGraph w={w*0.8} h={h}
             title="decades - tv"
             color={1}
             domain={5}
