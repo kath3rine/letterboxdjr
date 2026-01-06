@@ -40,7 +40,7 @@ export async function getStats(
         }
 
         if (type === 'movie') {
-            monthCounts[item.month] += 2
+            monthCounts[item.month] += 1
         } else if (item.episodes) {
             monthCounts[item.month] += item.episodes
         }
@@ -64,4 +64,36 @@ export async function getStats(
         avgRating,
         totalHours: items.reduce((sum, item) => sum + (type === 'movie' ? 2 : item.episodes ?? 0), 0),
     };
+}
+
+export async function getTheaterStats(items: Input[]) {
+    const genreCounts: {[genre: string]: number} = {}
+    const genreRating: {[genre: string]: number} = {}
+    const monthCounts: {[month: number]: number} = {}
+    let totalRating = 0
+
+    for (let i = 0; i < 12; i++) {
+        monthCounts[i + 1] = 0
+    }
+
+    for (let i = 0; i < items.length; i++) {
+        const item = items[i]
+        if (item.genre) {
+            genreCounts[item.genre] = (genreCounts[item.genre] || 0) + 1;
+            genreRating[item.genre] = (genreRating[item.genre] || 0) + item.points;
+        }
+        monthCounts[item.month] += 1
+        totalRating += item.points
+    }
+    const avgRating = Math.round((totalRating / items.length) * 100) / 100;
+
+    return {
+        genreData: Object.entries(genreCounts).map(([name, value]) => ({ name, value })),
+        genreRatings: Object.entries(genreRating).map(([name, total]) => ({
+            name,
+            value: Math.round((total / genreCounts[name]) * 100) / 100,
+        })),
+        monthData: Object.entries(monthCounts).map(([name, value]) => ({ name, value })),
+        avgRating
+    }
 }

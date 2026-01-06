@@ -8,7 +8,7 @@ type AreaProps = {
     w: number
     h: number
     color: number
-    domain: number
+    domain?: number
 }
 
 export function AreaGraph(props: AreaProps) {
@@ -19,7 +19,7 @@ export function AreaGraph(props: AreaProps) {
             <AreaChart width={props.w} height={props.h} data={props.data}>
                 <Tooltip/>
                 <XAxis dataKey="name" />
-                <YAxis domain={myDomain} interval={0}/>
+                <YAxis interval={0}/>
                 <Area dataKey="value"
                 type="monotone"
                 stroke={props.palette[props.color]} 

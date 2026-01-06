@@ -2,9 +2,10 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { PieGraph, BarGraph, AreaGraph } from '../components/Graphs'
 import { useState, useEffect } from 'react'
 import { Data } from '../utils/Types'
-import { getStats } from '../utils/Stats'
+import { getStats, getTheaterStats } from '../utils/Stats'
 import movieObjects from '../data/movies.json';
 import tvObjects from '../data/shows.json';
+import theaterObjects from '../data/theater.json'
 import '../styles/Stats.css'
 
 type HeaderItem = {
@@ -25,9 +26,10 @@ function Stats() {
     useEffect(() => {
         async function loadData() {
           try {
-            const [movieStats, showStats] = await Promise.all([
+            const [movieStats, showStats, theaterStats] = await Promise.all([
               getStats(movieObjects, 'movie'),
               getStats(tvObjects, 'tv'),
+              getTheaterStats(theaterObjects)
             ]);
     
             setData({
@@ -46,6 +48,11 @@ function Stats() {
               tvDecades: showStats.decadeData,
               tvDecadeRatings: showStats.decadeRatings,
               tvHrs: showStats.totalHours,
+              theaterCount: theaterObjects.length,
+              theaterAvg: theaterStats.avgRating,
+              theaterGenres: theaterStats.genreData,
+              theaterGenreRatings: theaterStats.genreRatings,
+              theaterMonths: theaterStats.monthData
             });
           } catch (err) {
             console.error("Failed to load stats data:", err);
@@ -61,12 +68,11 @@ function Stats() {
     if (loading) return <div>Loading stats...</div>;
 
 
-    const headerData: HeaderItem[] = [
+    const headerData: HeaderItem[] = [        
+        { top: data.movieCount * 2 + data.tvHrs + data.theaterCount * 2, bottom: "HOURS"},
         { top: data.movieCount, bottom: "MOVIES"},
         { top: data.tvCount, bottom: "SHOWS"},
-        { top: data.movieCount * 2 + data.tvHrs, bottom: "HOURS"},
-        { top: data.movieAvg, bottom: "AVG. MOVIE RATING"},
-        { top: data.tvAvg, bottom: "AVG. SHOW RATING"}
+        { top: data.theaterCount, bottom: "PLAYS"}
     ]
 
     return (
@@ -87,6 +93,28 @@ function Stats() {
 
         <h3> MOST WATCHED </h3>
         <div className="stats-section">
+
+        <PieGraph w={w} h={h}
+            title="media (in hours)" 
+            palette={palette}
+            data={[
+                { "name": "movies", "value": data.movieCount * 2 },
+                { "name": "tv", "value": data.tvHrs },
+                { "name": "theater", "value": data.theaterCount * 2}
+            ]}/>
+        <BarGraph w={w} h={h}
+            title="decades - movies"
+            domain={6}
+            data={data.movieDecades}
+            color={0}
+            palette={palette}/>            
+            
+            <BarGraph w={w} h={h}
+            title="decades - tv"
+            color={1}
+            domain={6}
+            data={data.tvDecades}
+            palette={palette}/>
             
             <PieGraph w={w} h={h}
             title="genres - movies" 
@@ -98,16 +126,15 @@ function Stats() {
             palette={palette}
             data={data.tvGenres}/>
 
-            <PieGraph w={w*0.5} h={h}
-            title="media (by hours)" 
+            <PieGraph w={w} h={h}
+            title="venues - theater" 
             palette={palette}
-            data={[
-                { "name": "movies", "value": data.movieCount * 2 },
-                { "name": "tv", "value": data.tvHrs }
-            ]}/>
+            data={data.theaterGenres}/>
+
+            
+        
                         
-                        
-            <AreaGraph w={w*.8} h={h}
+            <AreaGraph w={w} h={h}
             color={0}
             title="months - movies"
             data={data.movieMonths}
@@ -115,25 +142,16 @@ function Stats() {
             palette={palette}/>
 
 
-            <AreaGraph w={w*.8} h={h}
+            <AreaGraph w={w} h={h}
             color={1}
-            domain={75}
             title="months - tv"
             data={data.tvMonths}
             palette={palette}/>
 
-            <BarGraph w={w*.6} h={h}
-            title="decades - movies"
-            domain={6}
-            data={data.movieDecades}
-            color={0}
-            palette={palette}/>            
-            
-            <BarGraph w={w*0.6} h={h}
-            title="decades - tv"
-            color={1}
-            domain={6}
-            data={data.tvDecades}
+            <AreaGraph w={w} h={h}
+            color={2}
+            title="months - theater"
+            data={data.theaterMonths}
             palette={palette}/>
 
 
@@ -141,18 +159,16 @@ function Stats() {
 
         <h3> HIGHEST RATED </h3>
         <div className="stats-section">
-            <BarGraph w={w*1.3} h={h}
-            title="genres - movies"
-            domain={5}
-            data={data.movieGenreRatings}
-            palette={palette}/>
-
             <BarGraph w={w*0.8} h={h}
-            title="genres - tv"
+            title="media" 
+            palette={palette}
             domain={5}
-            data={data.tvGenreRatings}
-            palette={palette}/>
-        
+            data={[
+                { "name": "movies", "value": data.movieAvg },
+                { "name": "tv", "value": data.tvAvg },
+                { "name": "theater", "value": data.theaterAvg }
+            ]}/>
+
             <BarGraph w={w * 1.3} h={h}
             title="decades - movies"
             color={0}
@@ -160,12 +176,33 @@ function Stats() {
             data={data.movieDecadeRatings}
             palette={palette}/>
 
-            <BarGraph w={w*0.8} h={h}
+            <BarGraph w={w} h={h}
             title="decades - tv"
             color={1}
             domain={5}
             data={data.tvDecadeRatings}
             palette={palette}/>
+            
+            <BarGraph w={w*0.8} h={h}
+            title="venues - theater"
+            domain={5}
+            data={data.theaterGenreRatings}
+            palette={palette}/>
+
+            <BarGraph w={w*1.3} h={h}
+            title="genres - movies"
+            domain={5}
+            data={data.movieGenreRatings}
+            palette={palette}/>
+
+            <BarGraph w={w} h={h}
+            title="genres - tv"
+            domain={5}
+            data={data.tvGenreRatings}
+            palette={palette}/>
+
+
+
         </div>
         
     </div>

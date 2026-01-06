@@ -1,0 +1,50 @@
+[
+    {
+        "title": "cabaret",
+        "points": 5,
+        "month": 7,
+        "genre": "broadway",
+        "review": "exceeded all expectations. the cabaret format / atmosphere and 360 degree stage altered my brain chemistry"
+    },
+    {
+        "title": "maybe happy ending",
+        "points": 4,
+        "month": 7,
+        "genre": "broadway",
+        "review": "the pixar equivalent of a musical, i can see why it's popular. solid but not groundbreaking, still very sweet and stunning set / visuals"
+    },
+    {
+        "title": "a very potter musical",
+        "points": 4,
+        "month": 9,
+        "genre": "pro shot"
+    },
+    {
+        "title": "a very potter sequel",
+        "points": 5,
+        "month": 10,
+        "genre": "pro shot",
+        "review": "better than the original, solely b/c of umbridge"
+    },
+    {
+        "title": "a very potter senior year",
+        "points": 3,
+        "month": 10,
+        "genre": "pro shot",
+        "review": "docking a point due to harry potter's unfortunate haircut"
+    },
+    {
+        "title": "exorcistic",
+        "points": 3,
+        "month": 11,
+        "genre": "off-broadway",
+        "review": "kind of messy, hard to differentiate what happens in the musical and what's in the musical-within-a-musical. was still an interesting experience, and had its funny moments"
+    },
+    {
+        "title": "slam frank",
+        "points": 5,
+        "month": 11,
+        "genre": "off-broadway",
+        "review": "2025 version of book of mormon, but actually offensive. probably too blasphemous for broadway, but the low-budget set adds to the charm"
+    }
+]
