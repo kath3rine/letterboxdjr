@@ -4,6 +4,7 @@ export type Input = {
     points: number
     episodes?: number
     review?: string
+    year?: number
 }
 
 export type DiaryEntry = {

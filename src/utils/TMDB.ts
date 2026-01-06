@@ -4,24 +4,21 @@ export const BASE_URL = 'https://api.themoviedb.org/3'
 export async function searchTMDB(
     title: string,
     type: 'movie' | 'tv',
-    altIndex: boolean
+    year?: number
 ): Promise<any | null> {
-    const url = `${BASE_URL}/search/${type}?api_key=${API_KEY}&query=${encodeURIComponent(title)}`;
-    const res = await fetch(url);
+    var url = `${BASE_URL}/search/${type}?api_key=${API_KEY}&query=${encodeURIComponent(title)}`;
+    if (year) {
+        url = `${BASE_URL}/search/${type}?api_key=${API_KEY}&query=${encodeURIComponent(title)}&primary_release_year=${year}`
+    }
+
+        const res = await fetch(url);
     if (!res.ok) {
-        console.error(`TMDB search failed for "${title}"`);
+        console.log(`TMDB search failed for "${title}"`);
         return null;
     }
 
     const data = await res.json();
     const results = data.results || [];
     
-    if (results.length > 0) {
-        if (altIndex) {
-            return results[1]
-        } else {
-            return results[0]
-        }
-    }
-    return null
+    return results[0] || null
 }

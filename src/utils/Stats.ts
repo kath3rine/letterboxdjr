@@ -3,8 +3,7 @@ import { Input } from './Types'
 
 export async function getStats(
     items: Input[],
-    type: 'movie' | 'tv',
-    altIndices: number[] = []
+    type: 'movie' | 'tv'
 ) {
     const genreMapRes = await fetch(`${BASE_URL}/genre/${type}/list?api_key=${API_KEY}`);
     const genreMapJson = await genreMapRes.json();
@@ -22,7 +21,7 @@ export async function getStats(
 
     for (let i = 0; i < items.length; i++) {
         const item = items[i];
-        const result = await searchTMDB(item.title, type, altIndices.includes(i) ? true : false);
+        const result = await searchTMDB(item.title, type, item.year);
         if (!result) continue;
     
         const gid = result.genre_ids?.[0];

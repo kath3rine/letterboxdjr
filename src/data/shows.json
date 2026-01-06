@@ -23,5 +23,26 @@
         "episodes": 8,
         "month": 6,
         "review": "a little slow / not as gripping as i'd like"
+    },
+    {
+        "title": "Glee",
+        "points": 5,
+        "episodes": 66,
+        "month": 10,
+        "review": "this show raised me"
+    },
+    {
+        "title": "American Crime Story: Versace",
+        "points": 5,
+        "episodes": 9,
+        "month": 10,
+        "review": "technically flawless"
+    },
+    {
+        "title": "Hollywood",
+        "points": 2,
+        "episodes": 2,
+        "month": 11,
+        "review": "(dnf) the only thing worth watching about this is the lead actors' face cards"
     }
 ]

@@ -9,10 +9,10 @@ function Home() {
             <h1>Letterboxd Jr.</h1>
             <div id="buttons">
                 <button onClick={() => navigate('/diary')}>
-                    Diary
+                    2025 Diary
                 </button>
                 <button onClick={() => navigate('/stats')}>
-                    Yearly Stats
+                    2025 Stats
                 </button>
             </div>
             

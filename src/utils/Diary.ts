@@ -3,13 +3,12 @@ import { Input, DiaryEntry } from './Types'
 
 export async function getDiary(
     items: Input[], 
-    type: 'movie' | 'tv', 
-    altIndices: number[] = []
+    type: 'movie' | 'tv'
 ) {
     const diaryEntries: DiaryEntry[] = []
     for (let i = 0; i < items.length; i++) {
         const item = items[i];
-        const result = await searchTMDB(item.title, type, altIndices.includes(i) ? true : false);
+        const result = await searchTMDB(item.title, type, item.year);
         if (!result) continue;
     
         diaryEntries.push({

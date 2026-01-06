@@ -65,13 +65,13 @@ function Diary() {
     async function loadData() {
       try {
         const [movies, shows] = await Promise.all([
-          getDiary(movieObjects, 'movie', [8, 10]),
+          getDiary(movieObjects, 'movie'),
           getDiary(tvObjects, 'tv')
         ]);
         setMovieData(movies);
         setTvData(shows);
       } catch (err) {
-        console.error("Failed to load diary data:", err);
+        console.log("Failed to load diary data:", err);
       } finally {
         setLoading(false);
       }

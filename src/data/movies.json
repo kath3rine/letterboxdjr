@@ -58,8 +58,72 @@
     },
     { 
         "title": "Cabaret",
+        "points": 3,
+        "month": 7,
+        "review": "a joke compared to the stage adaptation"
+    },
+    { 
+        "title": "My First Summer",
+        "points": 2,
+        "month": 7,
+        "review": "better sleep aid than melatonin"
+    },
+    { 
+        "title": "The Handmaiden",
+        "points": 3,
+        "month": 7
+    },
+    { 
+        "title": "Moulin Rouge",
+        "year": 2001,
+        "points": 3,
+        "month":8,
+        "review": "a joke compared to the stage adaptation"
+    },
+    { 
+        "title": "Hedwig and the Angry Inch",
         "points": 4,
-        "month": 6
+        "month": 9,
+        "review": "would be ranked higher if the stage adaptation wasn't so perfect"
+    },
+    { 
+        "title": "A Simple Favor",
+        "points": 4,
+        "month": 9,
+        "review": "i thought this'd be a suburban saltburn but it tunred into a subtly sapphic three-way gone girl"
+    },
+    { 
+        "title": "Love Lies Bleeding",
+        "points": 3,
+        "month": 9
+    },
+    { 
+        "title": "Y Tu Mama Tambien",
+        "points": 3,
+        "month": 10,
+        "review": "movie: has two guys pining over a hot woman; me, internally: challengers"
+    },
+    { 
+        "title": "The Exorcist",
+        "points": 3,
+        "month": 10
+    },
+    { 
+        "title": "The Rocky Horror Picture Show",
+        "points": 3,
+        "month": 11,
+        "review": "they did this on glee"
+    },
+    { 
+        "title": "Wicked",
+        "points": 3,
+        "month": 12
+    },
+    { 
+        "title": "Love Actually",
+        "points": 3,
+        "month": 12,
+        "review": "too many white british people i can't keep track of 'em all"
     }
   ]
   
