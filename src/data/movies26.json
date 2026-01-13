@@ -1,0 +1,14 @@
+[
+    { 
+        "title": "Mulholland Drive",
+        "points": 5,
+        "month": 1,
+        "rw": true
+    },
+    { 
+        "title": "Marrowbone",
+        "points": 3,
+        "month": 1,
+        "review": "the idea was better than the execution"
+    }
+]

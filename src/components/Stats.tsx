@@ -1,11 +1,11 @@
 import { useLocation, useNavigate } from 'react-router-dom';
-import { PieGraph, BarGraph, AreaGraph, StackedBar } from '../components/Graphs'
+import { PieGraph, BarGraph, AreaGraph, StackedBar } from './Graphs'
 import { useState, useEffect } from 'react'
 import { Data } from '../utils/Types'
 import { getStats, getTheaterStats } from '../utils/Stats'
-import movieObjects from '../data/movies.json';
-import tvObjects from '../data/shows.json';
-import theaterObjects from '../data/theater.json'
+import movieObjects from '../data/movies25.json';
+import tvObjects from '../data/shows25.json';
+import theaterObjects from '../data/theater25.json'
 import '../styles/Stats.css'
 
 type HeaderItem = {
@@ -13,7 +13,13 @@ type HeaderItem = {
     bottom: string
 }
 
-function Stats() {
+type StatsType = {
+  year: string
+  movieObjects: any[]
+  tvObjects: any[]
+  theaterObjects: any[]
+}
+function Stats(props: StatsType) {
     const location = useLocation();
     const navigate = useNavigate();
     const palette = [
@@ -60,13 +66,13 @@ function Stats() {
         async function loadData() {
           try {
             const [movieStats, showStats, theaterStats] = await Promise.all([
-              getStats(movieObjects, 'movie'),
-              getStats(tvObjects, 'tv'),
-              getTheaterStats(theaterObjects)
+              getStats(props.movieObjects, 'movie'),
+              getStats(props.tvObjects, 'tv'),
+              getTheaterStats(props.theaterObjects)
             ]);
     
             setData({
-              movieCount: movieObjects.length,
+              movieCount: props.movieObjects.length,
               movieAvg: movieStats.avgRating,
               movieMonths: movieStats.monthData,
               movieGenres: movieStats.genreData,
@@ -74,7 +80,7 @@ function Stats() {
               movieDecades: movieStats.decadeData,
               movieDecadeRatings: movieStats.decadeRatings,
               movieRewatches: movieStats.rewatches,
-              tvCount: tvObjects.length,
+              tvCount: props.tvObjects.length,
               tvAvg: showStats.avgRating,
               tvMonths: showStats.monthData,
               tvGenres: showStats.genreData,
@@ -83,7 +89,7 @@ function Stats() {
               tvDecadeRatings: showStats.decadeRatings,
               tvHrs: showStats.totalHours,
               tvRewatches: showStats.rewatches,
-              theaterCount: theaterObjects.length,
+              theaterCount: props.theaterObjects.length,
               theaterAvg: theaterStats.avgRating,
               theaterGenres: theaterStats.genreData,
               theaterGenreRatings: theaterStats.genreRatings,
@@ -125,7 +131,7 @@ function Stats() {
         <button onClick={() => navigate('/')}>
             Home
         </button>
-        <h1>2025 in Film </h1>
+        <h1>{props.year} in Film </h1>
 
         <div id="stats-header">
             { headerData.map((item: HeaderItem) => (
@@ -171,7 +177,7 @@ function Stats() {
               title="most watched (in hours)" 
               palette={palette2}
               data={[
-                  { "name": "movies: new", "value": (data.movieCount - data.movieRewatches) * 2 },
+                  { "name": "movies: new", "value": (data.movieCount - data.movieRewatches) * 2},
                   { "name": "movies: rewatch", "value": data.movieRewatches * 2 },
                   { "name": "tv: new", "value": data.tvHrs - data.tvRewatches},
                   { "name": "tv: rewatch", "value": data.tvRewatches },

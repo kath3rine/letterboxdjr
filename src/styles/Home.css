@@ -18,6 +18,8 @@
         width: 100px;
     }
 
-    justify-content: center;
-    display: flex;
+    .button-row {
+        justify-content: center;
+        display: flex;
+    }
 }

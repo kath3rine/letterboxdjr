@@ -2,9 +2,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react'
 import { getDiary } from '../utils/Diary'
 import { DiaryEntry } from '../utils/Types'
-import movieObjects from '../data/movies.json';
-import tvObjects from '../data/shows.json';
-import theaterObjects from '../data/theater.json';
 import '../styles/Diary.css'
 import '../App.css'
 
@@ -89,8 +86,14 @@ function FilmReel(props: ReelType) {
 }
 
 
+type DiaryType = {
+  year: string
+  movieObjects: any[]
+  tvObjects: any[]
+  theaterObjects: any[]
+}
 
-function Diary() {
+function Diary(props: DiaryType) {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -103,9 +106,9 @@ function Diary() {
     async function loadData() {
       try {
         const [movies, shows, plays] = await Promise.all([
-          getDiary(movieObjects, 'movie'),
-          getDiary(tvObjects, 'tv'),
-          getDiary(theaterObjects, 'theater')
+          getDiary(props.movieObjects, 'movie'),
+          getDiary(props.tvObjects, 'tv'),
+          getDiary(props.theaterObjects, 'theater')
         ]);
         setMovieData(movies);
         setTvData(shows);
@@ -121,9 +124,9 @@ function Diary() {
   }, []);
 
   const reels: {title?: string; films: DiaryEntry[]; style: 'film' | 'vhs'}[] = [
-    { title: "my 2025 movie reel", films: movieData, style: "film" },
-    { title: "my 2025 tv show reel", films: tvData, style: "film" },
-    { title: "my 2025 theater reel", films: theaterData, style: "vhs" }
+    { title: `my ${props.year} movie reel`, films: movieData, style: "film" },
+    { title: `my ${props.year} tv reel`, films: tvData, style: "film" },
+    { title: `my ${props.year} theater reel`, films: theaterData, style: "vhs" }
   ]
 
   if (loading) return <div>Loading diary...</div>;
