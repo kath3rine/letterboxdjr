@@ -49,6 +49,7 @@ export function BarGraph(props: BarProps) {
                 <Tooltip/>
                 <XAxis dataKey="name" type="category"/>
                 <YAxis domain={myDomain}/>
+                
                 <Bar dataKey="value" >
                     {props.data && props.data.map((entry: any, index: number) => (
                         <Cell key={`cell-${index}`} 
@@ -61,6 +62,36 @@ export function BarGraph(props: BarProps) {
         </div>
     )
 }
+
+type StackedBarProps = {
+    title?: string
+    data: any[]
+    domain?: number
+    w: number
+    h: number
+    palette: string[]
+    categories: any[]
+}
+
+export function StackedBar(props: StackedBarProps) {
+    return(
+        <div>
+            <h3>{props.title}</h3>
+            <BarChart width={props.w} height={props.h} data={props.data}>
+                <Tooltip/>
+                <XAxis dataKey="name" type="category"/>
+                <YAxis/>
+                
+                {Array.from({ length: props.categories.length }, (_, i) => i).map((x) => (
+                    <Bar dataKey={props.categories[x]} 
+                    stackId="a" 
+                    fill={props.palette[x]} />
+                ))}
+            </BarChart>
+        </div>
+    )
+}
+
 
 type PieProps = {
     title?: string

@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from 'react-router-dom';
-import { PieGraph, BarGraph, AreaGraph } from '../components/Graphs'
+import { PieGraph, BarGraph, AreaGraph, StackedBar } from '../components/Graphs'
 import { useState, useEffect } from 'react'
 import { Data } from '../utils/Types'
 import { getStats, getTheaterStats } from '../utils/Stats'
@@ -43,7 +43,7 @@ function Stats() {
       "#FFD5AB"
     ]
     const w = 430
-    const h = 180
+    const h = 160
 
     const [data, setData] = useState<any>(null);
     const [loading, setLoading] = useState(true);
@@ -92,6 +92,15 @@ function Stats() {
     
     if (loading) return <div>Loading stats...</div>;
 
+    const totalMonths = Array.from({ length: 12 }, (_, i) => {
+      return {
+        name: i + 1, 
+        movies: data.movieMonths[i]?.value * 2 ?? 0,
+        tv: data.tvMonths[i]?.value ?? 0,
+        theater: data.theaterMonths[i]?.value * 2?? 0
+      }
+    })
+
 
     const headerData: HeaderItem[] = [        
         { top: data.movieCount * 2 + data.tvHrs + data.theaterCount * 2, bottom: "HOURS"},
@@ -115,9 +124,36 @@ function Stats() {
                 </div>
             ))}
         </div>
+        <div className='stats-section'>
+
+        <StackedBar w={w*1.5} h={h}
+            title="hrs watched per month (by media)"
+            data={totalMonths}
+            palette={palette}
+            categories = {["movies", "tv", "theater"]} 
+          /></div>
 
         <h3> MOST WATCHED </h3>
         <div className="stats-section">
+                        
+        {/* <BarGraph w={w} h={h}
+            color={0}
+            title="months - movies"
+            data={data.movieMonths}
+            palette={greens}/>
+
+
+            <BarGraph w={w} h={h}
+            color={1}
+            title="months - tv"
+            data={data.tvMonths}
+            palette={blues}/>
+
+            <BarGraph w={w} h={h}
+            color={2}
+            title="months - theater"
+            data={data.theaterMonths}
+            palette={palette}/> */}
         <PieGraph w={w*0.8} h={h}
             title="media (in hours)" 
             palette={palette}
@@ -158,27 +194,7 @@ function Stats() {
             data={data.theaterGenres}/>
 
             
-        
-                        
-            <AreaGraph w={w} h={h}
-            color={0}
-            title="months - movies"
-            data={data.movieMonths}
-            domain={75}
-            palette={greens}/>
 
-
-            <AreaGraph w={w} h={h}
-            color={1}
-            title="months - tv"
-            data={data.tvMonths}
-            palette={blues}/>
-
-            <AreaGraph w={w} h={h}
-            color={2}
-            title="months - theater"
-            data={data.theaterMonths}
-            palette={palette}/>
 
 
         </div>
