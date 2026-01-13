@@ -32,24 +32,33 @@ export function AreaGraph(props: AreaProps) {
 type BarProps = {
     title?: string
     data: any
-    domain?: number
+    myDomain: number
     w: number
     h: number
     palette: string[]
     color?: number
+    layout?: any
+    isRating?: boolean
 }
 
 export function BarGraph(props: BarProps) {
-    const myDomain: any = [0, props.domain]
 
     return(
         <div>
             <h3>{props.title}</h3>
-            <BarChart width={props.w} height={props.h} data={props.data}>
+            <BarChart width={props.w} height={props.h} data={props.data} layout={props.layout}>
                 <Tooltip/>
-                <XAxis dataKey="name" type="category"/>
-                <YAxis domain={myDomain}/>
-                
+                {props.layout == "vertical" ? (
+                    <>
+                        <XAxis type="number" domain={[0, 5]} />
+                        <YAxis type="category" dataKey="name" width={75} />
+                    </>
+                    ) : (
+                    <>
+                        <XAxis type="category" dataKey="name" />
+                        <YAxis type="number" domain={[0, props.myDomain]}/>
+                    </>
+                    )}
                 <Bar dataKey="value" >
                     {props.data && props.data.map((entry: any, index: number) => (
                         <Cell key={`cell-${index}`} 

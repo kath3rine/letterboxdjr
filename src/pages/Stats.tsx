@@ -50,8 +50,8 @@ function Stats() {
       "#FFAB57",
       "#FFD5AB"
     ]
-    const w = 330
-    const h = 165
+    const w = 300
+    const h = 200
 
     const [data, setData] = useState<any>(null);
     const [loading, setLoading] = useState(true);
@@ -139,7 +139,7 @@ function Stats() {
         <div className='stats-section'>
               <div className='stats-card-wide'>
                 <h3>hrs watched per month, by media</h3>
-                <StackedBar w={w*2} h={h*1.3}
+                <StackedBar w={w*2} h={h*1.1}
                     data={totalMonths}
                     palette={palette}
                     categories = {["movies", "tv", "theater"]} 
@@ -167,7 +167,7 @@ function Stats() {
         <div className='stats-card-wide'>
           <h3>media</h3>
           <div className='stats-card-content'>
-            <PieGraph w={w*1.4} h={h}
+            <PieGraph w={w*1.5} h={h}
               title="most watched (in hours)" 
               palette={palette2}
               data={[
@@ -178,10 +178,10 @@ function Stats() {
                   { "name": "theater: new", "value": (data.theaterCount - data.theaterRewatches) * 2},
                   { "name": "theater: rewatch", "value": data.theaterRewatches * 2}
               ]}/>
-            <BarGraph w={w*0.6} h={h}
+            <BarGraph w={w*0.7} h={h}
               title="highest rated" 
               palette={palette}
-              domain={5}
+              myDomain={5}
               data={[
                   { "name": "movies", "value": data.movieAvg },
                   { "name": "tv", "value": data.tvAvg },
@@ -190,16 +190,17 @@ function Stats() {
             </div>
         </div>
 
-        <div className='stats-card-wide'>
+        <div className='stats-card'>
           <h3>genres - movies</h3>
           <div className='stats-card-content'>
-            <PieGraph w={w*2} h={h}
+            <PieGraph w={w*1.2} h={h}
             title="most watched" 
             palette={greens}
             data={data.movieGenres}/>
-            <BarGraph w={w*2} h={h}
+            <BarGraph w={w} h={h*1.2}
             title="highest rated"
-            domain={5}
+            myDomain={5}
+            layout="vertical"
             data={data.movieGenreRatings}
             palette={greens}/>
           </div>
@@ -209,44 +210,32 @@ function Stats() {
           <h3>genres - tv</h3>
           <div className="stats-card-content">
             <PieGraph w={w} h={h}
-            title="genres - tv" 
+            title="most-watched" 
             palette={blues}
             data={data.tvGenres}/>
-            <BarGraph w={w} h={h}
-            title="genres - tv"
-            domain={5}
+            <BarGraph w={w} h={h*1.2}
+            title="highest rated"
+            myDomain={5}
+            layout="vertical"
             data={data.tvGenreRatings}
             palette={blues}/>
           </div>
         </div>
 
-        <div className='stats-card'>
-          <h3> venues - theater</h3>
-          <div className='stats-card-content'>
-          <PieGraph w={w} h={h}
-            title="venues - theater" 
-            palette={oranges}
-            data={data.theaterGenres}/>
-          <BarGraph w={w} h={h}
-            title="venues - theater"
-            domain={5}
-            data={data.theaterGenreRatings}
-            palette={oranges}/>
-          </div>
-        </div>
 
         <div className='stats-card'>
             <h3>decades (movies)</h3>
             <div className='stats-card-content'>
-              <BarGraph w={w*0.9} h={h}
+              <BarGraph w={w} h={h}
                   title="most watched"
-                  domain={6}
+                  myDomain={9}
                   data={data.movieDecades}
                   palette={greens}/>  
-              <BarGraph w={w*0.9} h={h}
+              <BarGraph w={w} h={h*1.2}
                   title="highest rated"
-                  domain={5}
+                  myDomain={5}
                   data={data.movieDecadeRatings}
+                  isRating={true}
                   palette={greens}/>
             </div>                    
         </div>
@@ -254,43 +243,35 @@ function Stats() {
         <div className='stats-card'>
           <h3>decades - tv</h3>
           <div className='stats-card-content'>
-            <BarGraph w={w*0.9} h={h}
+            <BarGraph w={w} h={h}
             title="most watched"
-            domain={6}
+            myDomain={9}
             data={data.tvDecades}
             palette={blues}/>
-            <BarGraph w={w*0.9} h={h}
+            <BarGraph w={w} h={h*1.2}
             title="highest rated"
-            domain={5}
+            myDomain={5}
             data={data.tvDecadeRatings}
             palette={blues}/>
           </div>
         </div>
         
 
-
-
-
-
-
-            
-
-
-
-
-
-
-
-
-            
-
-
-
-
-            
-
-
-
+        <div className='stats-card'>
+          <h3> venues - theater</h3>
+          <div className='stats-card-content'>
+          <PieGraph w={w*1.1} h={h}
+            title="most watched" 
+            palette={oranges}
+            data={data.theaterGenres}/>
+          <BarGraph w={w} h={h}
+            title="highest rated"
+            myDomain={5}
+            layout="vertical"
+            data={data.theaterGenreRatings}
+            palette={oranges}/>
+          </div>
+        </div>
         </div>
         
     </div>
