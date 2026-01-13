@@ -43,10 +43,41 @@
 .stats-section {
     display: flex;
     flex-wrap: wrap;
-    border-top: 1px #555 solid;
-    justify-content: space-around;
+}
+
+.stats-card, .stats-card-wide {
+    background-color: #2e3035;
+    padding: 10px;
+    border-radius: 20PX;
+    margin: 3px;
 
     h3 {
-        margin-left: 10%;
+        text-align: center;
+    }
+}
+
+.stats-card {
+    width: 23%;
+}
+
+.stats-card-wide {
+    width: 48%;
+}
+
+.stats-card-content {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    h3 {
+        margin-left: 30px;
+        text-align: left;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .stats-card, .stats-card-wide {
+        width: 95%
     }
 }

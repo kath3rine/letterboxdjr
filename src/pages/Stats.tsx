@@ -50,8 +50,8 @@ function Stats() {
       "#FFAB57",
       "#FFD5AB"
     ]
-    const w = 430
-    const h = 160
+    const w = 330
+    const h = 165
 
     const [data, setData] = useState<any>(null);
     const [loading, setLoading] = useState(true);
@@ -135,17 +135,16 @@ function Stats() {
                 </div>
             ))}
         </div>
+
         <div className='stats-section'>
-
-        <StackedBar w={w*1.5} h={h}
-            title="hrs watched per month (by media)"
-            data={totalMonths}
-            palette={palette}
-            categories = {["movies", "tv", "theater"]} 
-          /></div>
-
-        <h3> MOST WATCHED </h3>
-        <div className="stats-section">
+              <div className='stats-card-wide'>
+                <h3>hrs watched per month, by media</h3>
+                <StackedBar w={w*2} h={h*1.3}
+                    data={totalMonths}
+                    palette={palette}
+                    categories = {["movies", "tv", "theater"]} 
+                  />
+              </div>
                         
         {/* <BarGraph w={w} h={h}
             color={0}
@@ -165,96 +164,132 @@ function Stats() {
             title="months - theater"
             data={data.theaterMonths}
             palette={palette}/> */}
-        <PieGraph w={w} h={h}
-            title="media (in hours)" 
-            palette={palette2}
-            data={[
-                { "name": "movies: new", "value": (data.movieCount - data.movieRewatches) * 2 },
-                { "name": "movies: rewatch", "value": data.movieRewatches * 2 },
-                { "name": "tv: new", "value": data.tvHrs - data.tvRewatches},
-                { "name": "tv: rewatch", "value": data.tvRewatches },
-                { "name": "theater: new", "value": (data.theaterCount - data.theaterRewatches) * 2},
-                { "name": "theater: rewatch", "value": data.theaterRewatches * 2}
+        <div className='stats-card-wide'>
+          <h3>media</h3>
+          <div className='stats-card-content'>
+            <PieGraph w={w*1.4} h={h}
+              title="most watched (in hours)" 
+              palette={palette2}
+              data={[
+                  { "name": "movies: new", "value": (data.movieCount - data.movieRewatches) * 2 },
+                  { "name": "movies: rewatch", "value": data.movieRewatches * 2 },
+                  { "name": "tv: new", "value": data.tvHrs - data.tvRewatches},
+                  { "name": "tv: rewatch", "value": data.tvRewatches },
+                  { "name": "theater: new", "value": (data.theaterCount - data.theaterRewatches) * 2},
+                  { "name": "theater: rewatch", "value": data.theaterRewatches * 2}
+              ]}/>
+            <BarGraph w={w*0.6} h={h}
+              title="highest rated" 
+              palette={palette}
+              domain={5}
+              data={[
+                  { "name": "movies", "value": data.movieAvg },
+                  { "name": "tv", "value": data.tvAvg },
+                  { "name": "theater", "value": data.theaterAvg }
             ]}/>
+            </div>
+        </div>
 
-        <BarGraph w={w*1} h={h}
-            title="decades - movies"
-            domain={6}
-            data={data.movieDecades}
-            palette={greens}/>            
-            
-            <BarGraph w={w} h={h}
-            title="decades - tv"
-            domain={6}
-            data={data.tvDecades}
-            palette={blues}/>
-
-
-            
-            <PieGraph w={w*1.3} h={h}
-            title="genres - movies" 
+        <div className='stats-card-wide'>
+          <h3>genres - movies</h3>
+          <div className='stats-card-content'>
+            <PieGraph w={w*2} h={h}
+            title="most watched" 
             palette={greens}
             data={data.movieGenres}/>
-
+            <BarGraph w={w*2} h={h}
+            title="highest rated"
+            domain={5}
+            data={data.movieGenreRatings}
+            palette={greens}/>
+          </div>
+        </div>
+        
+        <div className='stats-card'>
+          <h3>genres - tv</h3>
+          <div className="stats-card-content">
             <PieGraph w={w} h={h}
             title="genres - tv" 
             palette={blues}
             data={data.tvGenres}/>
-
-            <PieGraph w={w*0.8} h={h}
-            title="venues - theater" 
-            palette={oranges}
-            data={data.theaterGenres}/>
-
-            
-
-
-
-        </div>
-
-        <h3> HIGHEST RATED </h3>
-        <div className="stats-section">
-            <BarGraph w={w} h={h}
-            title="media" 
-            palette={palette}
-            domain={5}
-            data={[
-                { "name": "movies", "value": data.movieAvg },
-                { "name": "tv", "value": data.tvAvg },
-                { "name": "theater", "value": data.theaterAvg }
-            ]}/>
-
-            <BarGraph w={w} h={h}
-            title="decades - movies"
-            domain={5}
-            data={data.movieDecadeRatings}
-            palette={greens}/>
-
-            <BarGraph w={w} h={h}
-            title="decades - tv"
-            domain={5}
-            data={data.tvDecadeRatings}
-            palette={blues}/>
-            
-
-
-            <BarGraph w={w*1.3} h={h}
-            title="genres - movies"
-            domain={5}
-            data={data.movieGenreRatings}
-            palette={greens}/>
-
             <BarGraph w={w} h={h}
             title="genres - tv"
             domain={5}
             data={data.tvGenreRatings}
             palette={blues}/>
+          </div>
+        </div>
 
-<BarGraph w={w*0.8} h={h}
+        <div className='stats-card'>
+          <h3> venues - theater</h3>
+          <div className='stats-card-content'>
+          <PieGraph w={w} h={h}
+            title="venues - theater" 
+            palette={oranges}
+            data={data.theaterGenres}/>
+          <BarGraph w={w} h={h}
             title="venues - theater"
             domain={5}
             data={data.theaterGenreRatings}
             palette={oranges}/>
+          </div>
+        </div>
+
+        <div className='stats-card'>
+            <h3>decades (movies)</h3>
+            <div className='stats-card-content'>
+              <BarGraph w={w*0.9} h={h}
+                  title="most watched"
+                  domain={6}
+                  data={data.movieDecades}
+                  palette={greens}/>  
+              <BarGraph w={w*0.9} h={h}
+                  title="highest rated"
+                  domain={5}
+                  data={data.movieDecadeRatings}
+                  palette={greens}/>
+            </div>                    
+        </div>
+
+        <div className='stats-card'>
+          <h3>decades - tv</h3>
+          <div className='stats-card-content'>
+            <BarGraph w={w*0.9} h={h}
+            title="most watched"
+            domain={6}
+            data={data.tvDecades}
+            palette={blues}/>
+            <BarGraph w={w*0.9} h={h}
+            title="highest rated"
+            domain={5}
+            data={data.tvDecadeRatings}
+            palette={blues}/>
+          </div>
+        </div>
+        
+
+
+
+
+
+
+            
+
+
+
+
+
+
+
+
+            
+
+
+
+
+            
+
+
 
         </div>
         
