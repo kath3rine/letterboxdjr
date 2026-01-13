@@ -19,7 +19,15 @@ function Stats() {
     const palette = [
       "#00E054",
       "#40BCF4",
-      "#FF8000"
+      "#FF8000",
+    ]
+    const palette2 = [
+      "#00E054",
+      "#81F0AA",
+      "#40BCF4",
+      "#A0DEFA",
+      "#FF8000",
+      "#FFAB57",
     ]
     const greens = [
       "#00E054",
@@ -65,6 +73,7 @@ function Stats() {
               movieGenreRatings: movieStats.genreRatings,
               movieDecades: movieStats.decadeData,
               movieDecadeRatings: movieStats.decadeRatings,
+              movieRewatches: movieStats.rewatches,
               tvCount: tvObjects.length,
               tvAvg: showStats.avgRating,
               tvMonths: showStats.monthData,
@@ -73,11 +82,13 @@ function Stats() {
               tvDecades: showStats.decadeData,
               tvDecadeRatings: showStats.decadeRatings,
               tvHrs: showStats.totalHours,
+              tvRewatches: showStats.rewatches,
               theaterCount: theaterObjects.length,
               theaterAvg: theaterStats.avgRating,
               theaterGenres: theaterStats.genreData,
               theaterGenreRatings: theaterStats.genreRatings,
-              theaterMonths: theaterStats.monthData
+              theaterMonths: theaterStats.monthData,
+              theaterRewatches: theaterStats.rewatches
             });
           } catch (err) {
             console.error("Failed to load stats data:", err);
@@ -154,17 +165,19 @@ function Stats() {
             title="months - theater"
             data={data.theaterMonths}
             palette={palette}/> */}
-        <PieGraph w={w*0.8} h={h}
+        <PieGraph w={w} h={h}
             title="media (in hours)" 
-            palette={palette}
+            palette={palette2}
             data={[
-                { "name": "movies", "value": data.movieCount * 2 },
-                { "name": "tv", "value": data.tvHrs },
-                { "name": "theater", "value": data.theaterCount * 2}
+                { "name": "movies: new", "value": (data.movieCount - data.movieRewatches) * 2 },
+                { "name": "movies: rewatch", "value": data.movieRewatches * 2 },
+                { "name": "tv: new", "value": data.tvHrs - data.tvRewatches},
+                { "name": "tv: rewatch", "value": data.tvRewatches },
+                { "name": "theater: new", "value": (data.theaterCount - data.theaterRewatches) * 2},
+                { "name": "theater: rewatch", "value": data.theaterRewatches * 2}
             ]}/>
 
-
-        <BarGraph w={w*1.3} h={h}
+        <BarGraph w={w*1} h={h}
             title="decades - movies"
             domain={6}
             data={data.movieDecades}
@@ -201,7 +214,7 @@ function Stats() {
 
         <h3> HIGHEST RATED </h3>
         <div className="stats-section">
-            <BarGraph w={w*0.8} h={h}
+            <BarGraph w={w} h={h}
             title="media" 
             palette={palette}
             domain={5}
@@ -211,7 +224,7 @@ function Stats() {
                 { "name": "theater", "value": data.theaterAvg }
             ]}/>
 
-            <BarGraph w={w * 1.3} h={h}
+            <BarGraph w={w} h={h}
             title="decades - movies"
             domain={5}
             data={data.movieDecadeRatings}

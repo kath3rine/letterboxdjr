@@ -42,6 +42,7 @@
         "title": "Blue Velvet",
         "points": 3,
         "month": 6,
+        "rw": true,
         "review": "WTF (derogatory)" 
     }, 
     {

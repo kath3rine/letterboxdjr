@@ -104,7 +104,7 @@ type PieProps = {
 
 export function PieGraph(props: PieProps) {
     const renderCustomizedLabel = ({ percent, name }: any) => {
-        if (percent <= 0.05) { return null }
+        if (percent <= 0.05 && props.data.length > 7) { return null }
         return `${name}: ${(percent * 100).toFixed(0)}%`;
       };
 

@@ -14,6 +14,7 @@ export async function getStats(
     const decadeRating: {[decade: string]: number} = {}
     const monthCounts: {[month: number]: number} = {}
     let totalRating = 0
+    let rewatches = 0
 
     for (let i = 0; i < 12; i++) {
         monthCounts[i + 1] = 0
@@ -40,9 +41,11 @@ export async function getStats(
         }
 
         if (type === 'movie') {
-            monthCounts[item.month] += 1
+            monthCounts[item.month] ++
+            if (item.rw) { rewatches++ }
         } else if (item.episodes) {
             monthCounts[item.month] += item.episodes
+            if (item.rw) { rewatches += item.episodes }
         }
         totalRating += item.points
     }
@@ -62,6 +65,7 @@ export async function getStats(
         })).sort((a, b) => String(a.name).localeCompare(String(b.name))),
         monthData: Object.entries(monthCounts).map(([name, value]) => ({ name, value })),
         avgRating,
+        rewatches,
         totalHours: items.reduce((sum, item) => sum + (type === 'movie' ? 2 : item.episodes ?? 0), 0),
     };
 }
@@ -71,6 +75,7 @@ export async function getTheaterStats(items: Input[]) {
     const genreRating: {[genre: string]: number} = {}
     const monthCounts: {[month: number]: number} = {}
     let totalRating = 0
+    let rewatches = 0
 
     for (let i = 0; i < 12; i++) {
         monthCounts[i + 1] = 0
@@ -84,6 +89,7 @@ export async function getTheaterStats(items: Input[]) {
         }
         monthCounts[item.month] += 1
         totalRating += item.points
+        if (item.rw) { rewatches++ }
     }
     const avgRating = Math.round((totalRating / items.length) * 100) / 100;
 
@@ -94,6 +100,7 @@ export async function getTheaterStats(items: Input[]) {
             value: Math.round((total / genreCounts[name]) * 100) / 100,
         })),
         monthData: Object.entries(monthCounts).map(([name, value]) => ({ name, value })),
-        avgRating
+        avgRating,
+        rewatches
     }
 }

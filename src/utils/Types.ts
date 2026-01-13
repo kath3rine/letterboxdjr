@@ -6,6 +6,7 @@ export type Input = {
     review?: string
     year?: number
     genre?: string
+    rw?: boolean
 }
 
 export type DiaryEntry = {
