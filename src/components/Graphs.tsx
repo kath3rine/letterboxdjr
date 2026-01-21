@@ -109,11 +109,13 @@ type PieProps = {
     legend?: boolean
     data: any
     palette: string[]
+    hideLabel?: boolean
 }
 
 export function PieGraph(props: PieProps) {
     const renderCustomizedLabel = ({ percent, name }: any) => {
-        if (percent <= 0.05 && props.data.length > 7) { return null }
+        if ((percent <= 0.05 && props.data.length > 7)) { return null }
+        if (props.hideLabel) { return `${(percent * 100).toFixed(0)}%`}
         return `${name}: ${(percent * 100).toFixed(0)}%`;
       };
 

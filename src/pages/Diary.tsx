@@ -53,7 +53,7 @@ function VHS({film, index}: {film: DiaryEntry, index: number}) {
                   </div>
 
                   <div className="film-back">
-                      <p id="details">#{index + 1} | rating: {film.points}/5</p>
+                      <p id="details">#{index + 1} | rating: {film.points}/5 | {film.genre}</p>
                       <p id="review">{film.review}</p>
                   </div>
               </div>

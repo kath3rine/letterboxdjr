@@ -3,14 +3,14 @@
         "title": "moulin rouge",
         "points": 4,
         "month": 1,
-        "genre": "broadway",
+        "genre": "musical: bway",
         "review": "excellent choreo / vfx but the concept was still a bit tacky...you're supposed to be in 1800s paris why are you singing katy perry and lorde"
     },
     {
         "title": "maybe happy ending",
         "points": 5,
         "month": 1,
-        "genre": "broadway",
+        "genre": "musical: bway",
         "rw": true,
         "review": "much better upon rewatch - had a better seat this time so i could see the set and better appreciate the details"
     }

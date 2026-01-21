@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from 'react-router-dom';
-import { PieGraph, BarGraph, AreaGraph, StackedBar } from './Graphs'
+import { PieGraph, BarGraph, AreaGraph, StackedBar } from '../components/Graphs'
 import { useState, useEffect } from 'react'
 import { Data } from '../utils/Types'
 import { getStats, getTheaterStats } from '../utils/Stats'
@@ -37,18 +37,18 @@ function Stats(props: StatsType) {
     ]
     const greens = [
       "#00E054",
-      "#22E46B",
-      "#42E880",
-      "#61EC95",
       "#81F0AA",
+      "#22E46B",
       "#A0F3C0",
+      "#42E880",
       "#C0F7D5",
+      "#61EC95",
       "#DFFBEA"
     ]
     const blues = [
       "#40BCF4",
-      "#71CDF7",
       "#A0DEFA",
+      "#71CDF7",
       "#D0EEFC"
     ]
     const oranges = [
@@ -79,7 +79,9 @@ function Stats(props: StatsType) {
               movieGenreRatings: movieStats.genreRatings,
               movieDecades: movieStats.decadeData,
               movieDecadeRatings: movieStats.decadeRatings,
+              movieRatingCounts: movieStats.ratingCounts,
               movieRewatches: movieStats.rewatches,
+
               tvCount: props.tvObjects.length,
               tvAvg: showStats.avgRating,
               tvMonths: showStats.monthData,
@@ -89,12 +91,15 @@ function Stats(props: StatsType) {
               tvDecadeRatings: showStats.decadeRatings,
               tvHrs: showStats.totalHours,
               tvRewatches: showStats.rewatches,
+              tvRatingCounts: showStats.ratingCounts,
+
               theaterCount: props.theaterObjects.length,
               theaterAvg: theaterStats.avgRating,
               theaterGenres: theaterStats.genreData,
               theaterGenreRatings: theaterStats.genreRatings,
               theaterMonths: theaterStats.monthData,
-              theaterRewatches: theaterStats.rewatches
+              theaterRewatches: theaterStats.rewatches,
+              theaterRatingCounts: theaterStats.ratingCounts
             });
           } catch (err) {
             console.error("Failed to load stats data:", err);
@@ -108,6 +113,7 @@ function Stats(props: StatsType) {
     
     
     if (loading) return <div>Loading stats...</div>;
+    const totalHours = data.movieCount * 2 + data.tvHrs + data.theaterCount * 2
 
     const totalMonths = Array.from({ length: 12 }, (_, i) => {
       return {
@@ -118,9 +124,18 @@ function Stats(props: StatsType) {
       }
     })
 
+    const totalRatingCounts = Array.from({ length: 5 }, (_, i) => {
+      return {
+        name: i + 1, 
+        tv: data.tvRatingCounts[i]?.value ?? 0,
+        movies: data.movieRatingCounts[i]?.value ?? 0,
+        
+        theater: data.theaterRatingCounts[i]?.value ?? 0,
+      }
+    }) 
 
     const headerData: HeaderItem[] = [        
-        { top: data.movieCount * 2 + data.tvHrs + data.theaterCount * 2, bottom: "HOURS"},
+        { top: totalHours, bottom: "HOURS"},
         { top: data.movieCount, bottom: "MOVIES"},
         { top: data.tvCount, bottom: "SHOWS"},
         { top: data.theaterCount, bottom: "PLAYS"}
@@ -145,12 +160,56 @@ function Stats(props: StatsType) {
         <div className='stats-section'>
               <div className='stats-card-wide'>
                 <h3>hrs watched per month, by media</h3>
-                <StackedBar w={w*2} h={h*1.1}
+                <div className='stats-card-content'>
+                <StackedBar w={w*1.5} h={h}
                     data={totalMonths}
                     palette={palette}
                     categories = {["movies", "tv", "theater"]} 
                   />
+                </div>
               </div>
+
+              <div className='stats-card-wide'>
+              <div className='stats-card-content'>
+                <PieGraph w={w*1.5} h={h}
+                  title="most watched media (in hours)" 
+                  palette={palette2}
+                  data={[
+                      { "name": "movies: new", "value": (data.movieCount - data.movieRewatches) * 2},
+                      { "name": "movies: rewatch", "value": data.movieRewatches * 2 },
+                      { "name": "tv: new", "value": data.tvHrs - data.tvRewatches},
+                      { "name": "tv: rewatch", "value": data.tvRewatches },
+                      { "name": "theater: new", "value": (data.theaterCount - data.theaterRewatches) * 2},
+                      { "name": "theater: rewatch", "value": data.theaterRewatches * 2}
+                  ]}/>
+                <div className='stats-card-details'>
+                  <li>{ ((data.movieRewatches * 2 + data.tvRewatches + data.theaterRewatches * 2) * 100 / totalHours).toFixed(1)}% rewatches</li>
+                  <li>{  (data.movieCount * 2 * 100 / totalHours).toFixed(1)}% movies</li>
+                  <li>{  (data.tvHrs * 100 / totalHours).toFixed(1)}% tv</li>
+                  <li>{  (data.theaterCount * 2 * 100 / totalHours).toFixed(1)}% theater</li>
+                </div>
+                </div>
+        </div>
+
+              <div className='stats-card-wide'><h3>ratings, by media</h3>
+                <div className='stats-card-content'>
+                
+                <StackedBar w={w} h={h*0.8}
+                    title="distribution"
+                    data={totalRatingCounts}
+                    palette={palette}
+                    categories = {["movies", "tv", "theater"]} 
+                  />
+                <BarGraph w={w} h={h*0.8}
+                  title="highest rated" 
+                  palette={palette}
+                  myDomain={5}
+                  data={[
+                      { "name": "movies", "value": data.movieAvg },
+                      { "name": "tv", "value": data.tvAvg },
+                      { "name": "theater", "value": data.theaterAvg }
+                ]}/></div>
+            </div> 
                         
         {/* <BarGraph w={w} h={h}
             color={0}
@@ -170,30 +229,23 @@ function Stats(props: StatsType) {
             title="months - theater"
             data={data.theaterMonths}
             palette={palette}/> */}
+
+
         <div className='stats-card-wide'>
-          <h3>media</h3>
+          <h3> venues - theater</h3>
           <div className='stats-card-content'>
-            <PieGraph w={w*1.5} h={h}
-              title="most watched (in hours)" 
-              palette={palette2}
-              data={[
-                  { "name": "movies: new", "value": (data.movieCount - data.movieRewatches) * 2},
-                  { "name": "movies: rewatch", "value": data.movieRewatches * 2 },
-                  { "name": "tv: new", "value": data.tvHrs - data.tvRewatches},
-                  { "name": "tv: rewatch", "value": data.tvRewatches },
-                  { "name": "theater: new", "value": (data.theaterCount - data.theaterRewatches) * 2},
-                  { "name": "theater: rewatch", "value": data.theaterRewatches * 2}
-              ]}/>
-            <BarGraph w={w*0.7} h={h}
-              title="highest rated" 
-              palette={palette}
-              myDomain={5}
-              data={[
-                  { "name": "movies", "value": data.movieAvg },
-                  { "name": "tv", "value": data.tvAvg },
-                  { "name": "theater", "value": data.theaterAvg }
-            ]}/>
-            </div>
+          <PieGraph w={w} h={h*0.8}
+            title="most watched" 
+            palette={oranges}
+            hideLabel={true}
+            data={data.theaterGenres}/>
+          <BarGraph w={w} h={h*0.8}
+            title="highest rated"
+            myDomain={5}
+            layout="vertical"
+            data={data.theaterGenreRatings}
+            palette={oranges}/>
+          </div>
         </div>
 
         <div className='stats-card'>
@@ -263,21 +315,7 @@ function Stats(props: StatsType) {
         </div>
         
 
-        <div className='stats-card'>
-          <h3> venues - theater</h3>
-          <div className='stats-card-content'>
-          <PieGraph w={w*1.1} h={h}
-            title="most watched" 
-            palette={oranges}
-            data={data.theaterGenres}/>
-          <BarGraph w={w} h={h}
-            title="highest rated"
-            myDomain={5}
-            layout="vertical"
-            data={data.theaterGenreRatings}
-            palette={oranges}/>
-          </div>
-        </div>
+
         </div>
         
     </div>

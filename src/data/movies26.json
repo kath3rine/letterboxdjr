@@ -3,12 +3,26 @@
         "title": "Mulholland Drive",
         "points": 5,
         "month": 1,
-        "rw": true
+        "rw": true,
+        "review": "'is this thing gay?' -hinge date i watched this with"
     },
     { 
         "title": "Marrowbone",
         "points": 3,
         "month": 1,
         "review": "the idea was better than the execution"
+    },
+    { 
+        "title": "Dinner in America",
+        "points": 4,
+        "month": 1,
+        "review": "why isn’t weird-off-putting-loser-girl rom com a more established archetype…"
+    },
+    { 
+        "title": "But I'm A Cheerleader",
+        "points": 3,
+        "month": 1,
+        "rw": true,
+        "review": "so trashy it made me more attracted to men"
     }
 ]

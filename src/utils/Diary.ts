@@ -15,13 +15,21 @@ export async function getDiary(
                 posterPath = `https://image.tmdb.org/t/p/w200${result.poster_path}`
             }
         }
-    
-        diaryEntries.push({
-          title: item.title,
-          poster: posterPath,
-          points: item.points,
-          review: item.review || '',
-        });
+        
+        (type == 'theater') 
+            ? diaryEntries.push({
+                title: item.title,
+                poster: posterPath,
+                points: item.points,
+                review: item.review || '',
+                genre: item.genre
+              })
+            : diaryEntries.push({
+                title: item.title,
+                poster: posterPath,
+                points: item.points,
+                review: item.review || '',
+              })
     }
     
     return diaryEntries;

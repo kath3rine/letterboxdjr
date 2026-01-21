@@ -14,6 +14,7 @@ export type DiaryEntry = {
     poster: string 
     points: number
     review: string
+    genre?: string
 }
 
 export type Data = {
