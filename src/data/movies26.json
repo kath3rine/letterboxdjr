@@ -35,7 +35,6 @@
         "title": "A Nice Indian Boy",
         "points": 4,
         "month": 4,
-        "rw": true,
         "review": "now i kinda see the hype behind jonathan groff <3"
     },
     { 
@@ -60,6 +59,7 @@
     { 
         "title": "The Girl Who Played With Fire",
         "points": 3,
+        "rw": true,
         "month": 6
     },
         { 

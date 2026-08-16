@@ -75,7 +75,7 @@ export function BarGraph(props: BarProps) {
 type StackedBarProps = {
     title?: string
     data: any[]
-    domain?: number
+    myDomain: number
     w: number
     h: number
     palette: string[]
@@ -89,7 +89,7 @@ export function StackedBar(props: StackedBarProps) {
             <BarChart width={props.w} height={props.h} data={props.data}>
                 <Tooltip/>
                 <XAxis dataKey="name" type="category"/>
-                <YAxis/>
+                <YAxis domain={[0, props.myDomain]}/>
                 
                 {Array.from({ length: props.categories.length }, (_, i) => i).map((x) => (
                     <Bar dataKey={props.categories[x]} 

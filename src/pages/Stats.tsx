@@ -164,6 +164,7 @@ function Stats(props: StatsType) {
                 <StackedBar w={w*1.5} h={h}
                     data={totalMonths}
                     palette={palette}
+                    myDomain={90}
                     categories = {["movies", "tv", "theater"]} 
                   />
                 </div>
@@ -198,6 +199,7 @@ function Stats(props: StatsType) {
                     title="distribution"
                     data={totalRatingCounts}
                     palette={palette}
+                    myDomain={17}
                     categories = {["movies", "tv", "theater"]} 
                   />
                 <BarGraph w={w} h={h*0.8}
