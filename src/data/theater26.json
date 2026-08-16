@@ -13,5 +13,56 @@
         "genre": "musical: bway",
         "rw": true,
         "review": "much better upon rewatch - had a better seat this time so i could see the set and better appreciate the details"
+    },
+    {
+        "title": "hadestown",
+        "points": 4,
+        "month": 1,
+        "genre": "musical: bway",
+        "review": "everything was phenomenal except the plot - i kept waiting for something to happen and it never did. very creative production, w/ chilling performances from the leads."
+    },
+    {
+        "title": "chess",
+        "points": 4,
+        "month": 1,
+        "genre": "musical: bway",
+        "review": "more of a concert than a play. the singing / performances were insanely good, but the set was nonexistent and the book was mediocre at best"
+    },
+    {
+        "title": "oh, mary",
+        "points": 5,
+        "month": 3,
+        "genre": "play: bway",
+        "review": "ridiculous in the best way possible. at any given moment i could never predict what'd happen next, but i laughed so hard."
+    },
+    {
+        "title": "merrily we roll along",
+        "points": 2,
+        "month": 5,
+        "genre": "musical: proshot",
+        "review": "2.5 hrs of my life i'll never get back...why is the cinematographer trying to make it look like a movie"
+    },
+    {
+        "title": "just in time",
+        "points": 3,
+        "month": 5,
+        "genre": "musical: bway",
+        "review": "the musical/book itself is so boring, it relies on the charisma of the lead actors to make it tolerable. isa briones was a surprisingly good singer tho."
+    },
+        {
+        "title": "maybe happy ending",
+        "points": 4,
+        "month": 5,
+        "genre": "musical: bway",
+        "rw": true,
+        "review": "not as good as the previous time due to worse seats...darren criss' last show :'("
+    },
+    {
+        "title": "hadestown",
+        "points": 4,
+        "month": 7,
+        "genre": "musical: proshot",
+        "rw": true,
+        "review": "pros: eva noblezada, cons: reeve carney (esp. compared to jack wolfe, who played orpheus when i saw it on bway). loved the aerial + under-the-stage shots tho"
     }
 ]

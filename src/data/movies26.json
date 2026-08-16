@@ -10,7 +10,7 @@
         "title": "Marrowbone",
         "points": 3,
         "month": 1,
-        "review": "the idea was better than the execution"
+        "review": "better in theory than the execution"
     },
     { 
         "title": "Dinner in America",
@@ -24,5 +24,48 @@
         "month": 1,
         "rw": true,
         "review": "so trashy it made me more attracted to men"
+    },
+    { 
+        "title": "When Harry Met Sally",
+        "points": 2,
+        "month": 1,
+        "review": "bleh"
+    },
+    { 
+        "title": "A Nice Indian Boy",
+        "points": 4,
+        "month": 4,
+        "rw": true,
+        "review": "now i kinda see the hype behind jonathan groff <3"
+    },
+    { 
+        "title": "The Girl With The Dragon Tattoo",
+        "points": 5,
+        "month": 5,
+        "rw": true,
+        "review": "forgot how good this movie is...very clean, almost too clean"
+    },
+        { 
+        "title": "The Girl With The Dragon Tattoo (Män som hatar kvinnor)",
+        "points": 1,
+        "month": 6,
+        "review": "not bad per se, but pales in comparison to the american adaptation in every aspect"
+    },
+    { 
+        "title": "Happy Together",
+        "points": 2,
+        "month": 6,
+        "review": "if i wanted to watch a couple squabble in cantonese i would've just gone to my parents' house"
+    },
+    { 
+        "title": "The Girl Who Played With Fire",
+        "points": 3,
+        "month": 6
+    },
+        { 
+        "title": "The Odyssey",
+        "points": 3,
+        "month": 7,
+        "review": "only watched b/c j & d wanted to. while i can recognize it's a feat in filmmaking, it was too long and TOO LOUD"
     }
 ]
